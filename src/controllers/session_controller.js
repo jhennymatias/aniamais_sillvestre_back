@@ -15,7 +15,7 @@ module.exports = {
             const comparePassword = decryptPassword(hash + ':' + password);
             if (LoginPassword === comparePassword) {
                 console.log('sucesso')
-
+                response.status(200).json(user)
             } else {
                 return response.status(400).json({ error: "Wrong password" })
 

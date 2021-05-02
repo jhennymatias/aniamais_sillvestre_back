@@ -15,4 +15,27 @@ module.exports = {
         return response.json(classes);
     },
 
+    async update(request, response) {
+        const { id_classe, descricao} = request.body;
+        if (!id_classe) return res.status(404).json({})
+        else {
+            await connection('classe')
+                .where('id_classe', '=', id_classe)
+                .update({
+                    descricao
+                });
+            return response.status(200).send("OK");
+        }
+    },
+
+    async delete(request, response) {
+        const { id_classe } = request.params;
+        await connection('classe')
+            .where('id_classe', id_classe)
+            .delete();
+
+        return response.status(200).send("DELETE");
+    }
+
+
 };
